@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GildedRose</title>
+  <title>Coverage Report > AgedBrie</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.gildedrose</a>
 </div>
 
-<h1>Coverage Summary for Class: GildedRose (com.gildedrose)</h1>
+<h1>Coverage Summary for Class: AgedBrie (com.gildedrose)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -40,7 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GildedRose</td>
+  <td class="name">AgedBrie</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -51,18 +51,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    40%
+    100%
   </span>
   <span class="absValue">
-    (2/5)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.3%
+    100%
   </span>
   <span class="absValue">
-    (28/31)
+    (5/5)
   </span>
 </td>
 </tr>
@@ -79,76 +79,111 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;class GildedRose {
 &nbsp;    Item[] items;
 &nbsp;
-<b class="fc">&nbsp;    public GildedRose(Item[] items) {</b>
-<b class="fc">&nbsp;        this.items = items;</b>
+&nbsp;    public GildedRose(Item[] items) {
+&nbsp;        this.items = items;
 &nbsp;    }
 &nbsp;
 &nbsp;    public void updateQuality() {
+&nbsp;        Normal normal = new Normal();
+&nbsp;        AgedBrie ageBrie = new AgedBrie();
+&nbsp;        Backstage backstage = new Backstage();
+&nbsp;        Sulfuras sulfuras = new Sulfuras();
 &nbsp;
-<b class="fc">&nbsp;        for (Item item: items) {</b>
-<b class="fc">&nbsp;            if (!item.name.equals(&quot;Aged Brie&quot;)</b>
-<b class="fc">&nbsp;                    &amp;&amp; !item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;)) {</b>
-<b class="fc">&nbsp;                if (item.quality &gt; 0) {</b>
-<b class="fc">&nbsp;                    if (!item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;)) {</b>
-<b class="fc">&nbsp;                        item.quality = item.quality - 1;</b>
-&nbsp;                    }
-&nbsp;                }
+&nbsp;        for (Item item: items) {
+&nbsp;            if (isAgedBrie(item)) {
+&nbsp;                ageBrie.update(item);
+&nbsp;            } else if (isBackstage(item)) {
+&nbsp;                backstage.update(item);
+&nbsp;            } else if (isSulfuras(item)) {
+&nbsp;                sulfuras.update(item);
 &nbsp;            } else {
-<b class="fc">&nbsp;                if (item.quality &lt; 50) {</b>
-<b class="fc">&nbsp;                    item.quality = item.quality + 1;</b>
-&nbsp;
-<b class="fc">&nbsp;                    if (item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;)) {</b>
-<b class="fc">&nbsp;                        if (item.sellIn &lt; 11) {</b>
-<b class="fc">&nbsp;                            if (item.quality &lt; 50) {</b>
-<b class="fc">&nbsp;                                item.quality = item.quality + 1;</b>
-&nbsp;                            }
-&nbsp;                        }
-&nbsp;
-<b class="fc">&nbsp;                        if (item.sellIn &lt; 6) {</b>
-<b class="fc">&nbsp;                            if (item.quality &lt; 50) {</b>
-<b class="fc">&nbsp;                                item.quality = item.quality + 1;</b>
-&nbsp;                            }
-&nbsp;                        }
-&nbsp;                    }
-&nbsp;                }
-&nbsp;            }
-&nbsp;
-<b class="fc">&nbsp;            if (!item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;)) {</b>
-<b class="fc">&nbsp;                item.sellIn = item.sellIn - 1;</b>
-&nbsp;            }
-&nbsp;
-<b class="fc">&nbsp;            if (item.sellIn &lt; 0) {</b>
-<b class="fc">&nbsp;                if (!item.name.equals(&quot;Aged Brie&quot;)) {</b>
-<b class="fc">&nbsp;                    if (!item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;)) {</b>
-<b class="fc">&nbsp;                        if (item.quality &gt; 0) {</b>
-<b class="fc">&nbsp;                            if (!item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;)) {</b>
-<b class="fc">&nbsp;                                item.quality = item.quality - 1;</b>
-&nbsp;                            }
-&nbsp;                        }
-&nbsp;                    } else {
-<b class="fc">&nbsp;                        item.quality = item.quality - item.quality;</b>
-&nbsp;                    }
-&nbsp;                } else {
-<b class="fc">&nbsp;                    if (item.quality &lt; 50) {</b>
-<b class="fc">&nbsp;                        item.quality = item.quality + 1;</b>
-&nbsp;                    }
-&nbsp;                }
+&nbsp;                normal.update(item);
 &nbsp;            }
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    public static boolean isAgedBrie(Item item) {
-<b class="nc">&nbsp;        return item.name.equals(&quot;Aged Brie&quot;);</b>
+&nbsp;        return item.name.equals(&quot;Aged Brie&quot;);
 &nbsp;    }
 &nbsp;
 &nbsp;    public static boolean isBackstage(Item item) {
-<b class="nc">&nbsp;        return item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;);</b>
+&nbsp;        return item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;);
 &nbsp;    }
 &nbsp;
 &nbsp;    public static boolean isSulfuras(Item item) {
-<b class="nc">&nbsp;        return item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;);</b>
+&nbsp;        return item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;);
 &nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;class Normal {
+&nbsp;
+&nbsp;    public void update(Item item) {
+&nbsp;        decrementQuality(item, 1);
+&nbsp;        decrementSellIn(item, 1);
+&nbsp;        if (item.sellIn &lt; 0) {
+&nbsp;            decrementQuality(item, 1);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // All utility functions below
+&nbsp;    protected void decrementSellIn(Item item, int num) {
+&nbsp;        item.sellIn -= num;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void decrementQuality(Item item, int num) {
+&nbsp;        item.quality -= num;
+&nbsp;        if (item.quality &lt; 0) {
+&nbsp;            item.quality = 0;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void incrementQuality(Item item, int num) {
+&nbsp;        item.quality += num;
+&nbsp;        if (item.quality &gt; 50) {
+&nbsp;            item.quality = 50;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+<b class="fc">&nbsp;class AgedBrie extends Normal{</b>
+&nbsp;    @Override
+&nbsp;    public void update(Item item) {
+<b class="fc">&nbsp;        incrementQuality(item, 1);</b>
+<b class="fc">&nbsp;        decrementSellIn(item, 1);</b>
+<b class="fc">&nbsp;        if (item.sellIn &lt; 0) {</b>
+<b class="fc">&nbsp;            incrementQuality(item, 1);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;class Backstage extends Normal{
+&nbsp;    @Override
+&nbsp;    public void update(Item item) {
+&nbsp;        updateQualityBefore(item);
+&nbsp;        decrementSellIn(item, 1);
+&nbsp;        if (item.sellIn &lt; 0) {
+&nbsp;            item.quality = 0;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateQualityBefore(Item item) {
+&nbsp;            if (item.sellIn &lt; 6) {
+&nbsp;                incrementQuality(item, 3);
+&nbsp;            } else if (item.sellIn &lt; 11) {
+&nbsp;                incrementQuality(item, 2);
+&nbsp;            } else {
+&nbsp;                incrementQuality(item, 1);
+&nbsp;            }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;class Sulfuras extends Normal{
+&nbsp;    @Override
+&nbsp;    public void update(Item item) {
+&nbsp;    }
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -173,7 +208,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-01-15 14:18</div>
+    <div style="float:right;">generated on 2023-01-15 15:54</div>
 </div>
 </body>
 </html>

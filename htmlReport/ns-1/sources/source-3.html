@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > Backstage</title>
+  <title>Coverage Report > GildedRose</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.gildedrose</a>
 </div>
 
-<h1>Coverage Summary for Class: Backstage (com.gildedrose)</h1>
+<h1>Coverage Summary for Class: GildedRose (com.gildedrose)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -40,7 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">Backstage</td>
+  <td class="name">GildedRose</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,15 +54,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90%
+    100%
   </span>
   <span class="absValue">
-    (9/10)
+    (17/17)
   </span>
 </td>
 </tr>
@@ -79,40 +79,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;class GildedRose {
 &nbsp;    Item[] items;
 &nbsp;
-&nbsp;    public GildedRose(Item[] items) {
-&nbsp;        this.items = items;
+<b class="fc">&nbsp;    public GildedRose(Item[] items) {</b>
+<b class="fc">&nbsp;        this.items = items;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public void updateQuality() {
-&nbsp;        Normal normal = new Normal();
-&nbsp;        AgedBrie ageBrie = new AgedBrie();
-&nbsp;        Backstage backstage = new Backstage();
-&nbsp;        Sulfuras sulfuras = new Sulfuras();
+<b class="fc">&nbsp;        Normal normal = new Normal();</b>
+<b class="fc">&nbsp;        AgedBrie ageBrie = new AgedBrie();</b>
+<b class="fc">&nbsp;        Backstage backstage = new Backstage();</b>
+<b class="fc">&nbsp;        Sulfuras sulfuras = new Sulfuras();</b>
 &nbsp;
-&nbsp;        for (Item item: items) {
-&nbsp;            if (isAgedBrie(item)) {
-&nbsp;                ageBrie.update(item);
-&nbsp;            } else if (isBackstage(item)) {
-&nbsp;                backstage.update(item);
-&nbsp;            } else if (isSulfuras(item)) {
-&nbsp;                sulfuras.update(item);
+<b class="fc">&nbsp;        for (Item item: items) {</b>
+<b class="fc">&nbsp;            if (isAgedBrie(item)) {</b>
+<b class="fc">&nbsp;                ageBrie.update(item);</b>
+<b class="fc">&nbsp;            } else if (isBackstage(item)) {</b>
+<b class="fc">&nbsp;                backstage.update(item);</b>
+<b class="fc">&nbsp;            } else if (isSulfuras(item)) {</b>
+<b class="fc">&nbsp;                sulfuras.update(item);</b>
 &nbsp;            } else {
-&nbsp;                normal.update(item);
+<b class="fc">&nbsp;                normal.update(item);</b>
 &nbsp;            }
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    public static boolean isAgedBrie(Item item) {
-&nbsp;        return item.name.equals(&quot;Aged Brie&quot;);
+<b class="fc">&nbsp;        return item.name.equals(&quot;Aged Brie&quot;);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public static boolean isBackstage(Item item) {
-&nbsp;        return item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;);
+<b class="fc">&nbsp;        return item.name.equals(&quot;Backstage passes to a TAFKAL80ETC concert&quot;);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public static boolean isSulfuras(Item item) {
-&nbsp;        return item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;);
+<b class="fc">&nbsp;        return item.name.equals(&quot;Sulfuras, Hand of Ragnaros&quot;);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;}
@@ -158,23 +158,23 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;}
 &nbsp;
-<b class="fc">&nbsp;class Backstage extends Normal{</b>
+&nbsp;class Backstage extends Normal{
 &nbsp;    @Override
 &nbsp;    public void update(Item item) {
-<b class="fc">&nbsp;        updateQualityBefore(item);</b>
-<b class="fc">&nbsp;        decrementSellIn(item, 1);</b>
-<b class="fc">&nbsp;        if (item.sellIn &lt; 0) {</b>
-<b class="fc">&nbsp;            item.quality = 0;</b>
+&nbsp;        updateQualityBefore(item);
+&nbsp;        decrementSellIn(item, 1);
+&nbsp;        if (item.sellIn &lt; 0) {
+&nbsp;            item.quality = 0;
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;    public void updateQualityBefore(Item item) {
-<b class="fc">&nbsp;            if (item.sellIn &lt; 6) {</b>
-<b class="fc">&nbsp;                incrementQuality(item, 3);</b>
-<b class="fc">&nbsp;            } else if (item.sellIn &lt; 11) {</b>
-<b class="fc">&nbsp;                incrementQuality(item, 2);</b>
+&nbsp;            if (item.sellIn &lt; 6) {
+&nbsp;                incrementQuality(item, 3);
+&nbsp;            } else if (item.sellIn &lt; 11) {
+&nbsp;                incrementQuality(item, 2);
 &nbsp;            } else {
-<b class="nc">&nbsp;                incrementQuality(item, 1);</b>
+&nbsp;                incrementQuality(item, 1);
 &nbsp;            }
 &nbsp;    }
 &nbsp;}

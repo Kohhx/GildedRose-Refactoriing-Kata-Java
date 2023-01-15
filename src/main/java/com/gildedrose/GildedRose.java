@@ -8,58 +8,23 @@ class GildedRose {
     }
 
     public void updateQuality() {
+        Normal normal = new Normal();
+        AgedBrie ageBrie = new AgedBrie();
+        Backstage backstage = new Backstage();
+        Sulfuras sulfuras = new Sulfuras();
 
         for (Item item: items) {
-            if (!isAgedBrie(item) && !isBackstage(item) ) {
-                if (item.quality > 0) {
-                    if (!isSulfuras(item)) {
-                        item.quality = item.quality - 1;
-                    }
-                }
+            if (isAgedBrie(item)) {
+                ageBrie.update(item);
+            } else if (isBackstage(item)) {
+                backstage.update(item);
+            } else if (isSulfuras(item)) {
+                sulfuras.update(item);
             } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (isBackstage(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!isAgedBrie(item)) {
-                    if (!isBackstage(item)) {
-                        if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+                normal.update(item);
             }
         }
     }
-
 
     public static boolean isAgedBrie(Item item) {
         return item.name.equals("Aged Brie");
@@ -72,4 +37,74 @@ class GildedRose {
     public static boolean isSulfuras(Item item) {
         return item.name.equals("Sulfuras, Hand of Ragnaros");
     }
+
+}
+class Normal {
+
+    public void update(Item item) {
+        decrementQuality(item, 1);
+        decrementSellIn(item, 1);
+        if (item.sellIn < 0) {
+            decrementQuality(item, 1);
+        }
+    }
+
+    // All utility functions below
+    protected void decrementSellIn(Item item, int num) {
+        item.sellIn -= num;
+    }
+
+    protected void decrementQuality(Item item, int num) {
+        item.quality -= num;
+        if (item.quality < 0) {
+            item.quality = 0;
+        }
+    }
+
+    protected void incrementQuality(Item item, int num) {
+        item.quality += num;
+        if (item.quality > 50) {
+            item.quality = 50;
+        }
+    }
+}
+
+class AgedBrie extends Normal{
+    @Override
+    public void update(Item item) {
+        incrementQuality(item, 1);
+        decrementSellIn(item, 1);
+        if (item.sellIn < 0) {
+            incrementQuality(item, 1);
+        }
+    }
+
+}
+
+class Backstage extends Normal{
+    @Override
+    public void update(Item item) {
+        updateQualityBefore(item);
+        decrementSellIn(item, 1);
+        if (item.sellIn < 0) {
+            item.quality = 0;
+        }
+    }
+
+    public void updateQualityBefore(Item item) {
+            if (item.sellIn < 6) {
+                incrementQuality(item, 3);
+            } else if (item.sellIn < 11) {
+                incrementQuality(item, 2);
+            } else {
+                incrementQuality(item, 1);
+            }
+    }
+}
+
+class Sulfuras extends Normal{
+    @Override
+    public void update(Item item) {
+    }
+
 }
